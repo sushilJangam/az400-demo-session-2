@@ -15,6 +15,9 @@ jobs:
       # - name: Upload artifacts for deployment
       #   run: zip -r site.zip *
 
+      - name: Install dependencies
+        run: npm install --production
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
