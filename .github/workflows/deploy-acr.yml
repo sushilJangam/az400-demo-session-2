@@ -1,0 +1,32 @@
+name: Build and Deploy Docker App to Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Log in to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: <your-acr-name>.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and Push
+        run: |
+          docker build -t htmldemo.azurecr.io/html-demo:${{ github.sha }} .
+          docker push htmldemo.azurecr.io/html-demo:${{ github.sha }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: html-demo-pipeline-2
+          images: htmldemo.azurecr.io/html-demo:${{ github.sha }}
