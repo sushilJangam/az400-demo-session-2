@@ -12,12 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Upload artifacts for deployment
-        run: zip -r site.zip *
+      # - name: Upload artifacts for deployment
+      #   run: zip -r site.zip *
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: html-demo-pipeline
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: site.zip
+          package: .
