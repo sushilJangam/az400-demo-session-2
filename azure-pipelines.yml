@@ -2,7 +2,7 @@ trigger:
 - main   # or your default branch
 
 pool:
-  name: PromoxAgentPool   # 👈 the agent pool you created in DevOps
+  name: EdurekaSessionDemoPool   # 👈 the agent pool you created in DevOps
   demands: agent.os -equals Linux
 
 steps:
