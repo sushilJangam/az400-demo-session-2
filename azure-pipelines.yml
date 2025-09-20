@@ -1,21 +1,19 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
-- main
+- main   # or your default branch
 
 pool:
-  vmImage: ubuntu-latest
+  name: ProxmoxAgents   # 👈 the agent pool you created in DevOps
+  demands: agent.os -equals Linux
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
+- script: echo "Hello from Proxmox self-hosted agent!"
+  displayName: "Test agent connectivity"
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    echo "Node.js version:"
+    node -v
+    echo "NPM version:"
+    npm -v
+    echo "OS info:"
+    uname -a
+  displayName: "Check installed tools"
