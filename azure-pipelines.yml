@@ -6,6 +6,17 @@ pool:
   demands: agent.os -equals Linux
 
 steps:
+- task: Maven@4
+  inputs:
+    azureSubscription: 'Sushil-Prod-Serice-Connection.'
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 - script: echo "Hello from Proxmox self-hosted agent!"
   displayName: "Test agent connectivity"
 
