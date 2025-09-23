@@ -2,12 +2,10 @@ trigger:
 - main   # or your default branch
 
 pool:
-  name: Edureka Session Demo.   # 👈 the agent pool you created in DevOps
+  name: Edureka Session Demo  # 👈 the agent pool you created in DevOps
   demands: agent.os -equals Linux
 
 steps:
-
-
 - script: |
     echo "Node.js version:"
     node -v
