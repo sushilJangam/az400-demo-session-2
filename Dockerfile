@@ -6,10 +6,13 @@ COPY package*.json ./
 
 RUN npm install --production
 
+
 COPY . .
 
-EXPOSE 8080
+EXPOSE 4500
 
-ENV PORT=8080
+#1-65655
 
+ENV PORT=4500
+# From start application iniside container
 CMD ["npm", "start"]
